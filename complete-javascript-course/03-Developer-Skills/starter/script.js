@@ -3,7 +3,7 @@
 /*
 const calcAge = (birthYear) => 2026 - birthYear;
 console.log(calcAge(1996));
-*/
+
 
 const measureKelvin = function () {
   const measurement = {
@@ -22,3 +22,5 @@ const measureKelvin = function () {
 
 //A IDENTIFY
 console.log(measureKelvin());
+
+*/
