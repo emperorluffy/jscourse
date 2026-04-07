@@ -729,7 +729,7 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
-*/
+
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -787,3 +787,4 @@ for (const day of days) {
 //Method
 console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
 console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+*/
