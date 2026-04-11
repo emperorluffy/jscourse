@@ -210,3 +210,12 @@ poll.displayResults.call({ answers: [5, 3, 1, 2] }, 'string');
 */
 
 //CLOSURES
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  // Add this to test the closure:
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
