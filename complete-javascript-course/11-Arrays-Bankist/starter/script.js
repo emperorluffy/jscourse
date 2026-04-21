@@ -509,3 +509,45 @@ console.log(x);
 x.fill(1, 3);
 console.log(x);
 */
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+//1.
+
+dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28)));
+
+console.log(dogs);
+
+//2.
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogSarah);
+console.log(
+  `Sarah's dog is eating too ${dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'}.`,
+);
+
+//3
+const ownerEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownerEatTooMuch);
+
+const ownerEatToolittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownerEatToolittle);
+
+//4.
+
+console.log(`${ownerEatTooMuch.join(' and ')}'s dog eat too much!`);
+console.log(`${ownerEatToolittle.join(' and ')}'s dog eat too little!`);
+
+//5.
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+
