@@ -508,7 +508,7 @@ console.log(x);
 
 x.fill(1, 3);
 console.log(x);
-*/
+
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
@@ -550,4 +550,58 @@ console.log(`${ownerEatToolittle.join(' and ')}'s dog eat too little!`);
 //5.
 console.log(dogs.some(dog => dog.curFood === dog.recFood));
 
+*/
 
+//Array Methods Practice
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+//2.
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov >= 1000).length;
+
+console.log(numDeposits1000);
+
+//prefixed ++operator
+let a = 10;
+console.log(a++);
+console.log(a);
+
+//3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 },
+  );
+
+console.log(deposits, withdrawals);
+
+//4.
+//this is a nice tile -> This Is a Nice Title
+
+const convertTitleCase = function (title) {
+  const expections = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word =>
+      expections.includes(word) ? word : word[0].toUpperCase() + word.slice(1),
+    );
+  return titleCase;
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
