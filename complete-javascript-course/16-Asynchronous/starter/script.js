@@ -182,7 +182,18 @@ const getCountryData = country => {
 //     .then(data => renderCountry(data[0]));
 // };
 
-btn.addEventListener('click', function () {
-  getCountryData('kenya');
+// btn.addEventListener('click', function () {
+//   getCountryData('kenya');
+// });
+// getCountryData('Australia');
+
+console.log('Test start');
+
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+Promise.resolve('Resovled promise 2').then(res => {
+  for (let i = 0; i < 100000000; i++) {}
+  console.log(res);
 });
-getCountryData('Australia');
+
+console.log('Test end');
