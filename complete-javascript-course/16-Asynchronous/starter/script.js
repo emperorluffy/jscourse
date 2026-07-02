@@ -5,10 +5,10 @@ const countriesContainer = document.querySelector('.countries');
 
 const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
-const renderCountry = function (data) {
+const renderCountry = function ([data]) {
   // 1. Safely extract the first language name
   const lang = Object.values(data.languages)[0];
 
@@ -29,7 +29,7 @@ const renderCountry = function (data) {
   `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
 /*
@@ -229,3 +229,45 @@ wait(2)
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('Problem!')).catch(x => console.log(x));
 */
+
+////////Coding challenge//////////////
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+      );
+    })
+
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.address.state},${data.address.country}`);
+      return fetch(
+        `https://countries-api-836d.onrender.com/countries/name/${data.address.country}`,
+      );
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error(`Country not found(${response.status})`);
+      return response.json();
+    })
+    .then(data => renderCountry(data))
+    .catch(err => console.error(`Something went wrong: ${err.message}`));
+};
+
+// whereAmI(52.508, 13.381);
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err),
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+btn.addEventListener('click', whereAmI);
