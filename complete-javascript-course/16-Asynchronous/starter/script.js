@@ -317,7 +317,7 @@ createImage('img/img-1.jpg')
     currentImg.style.display = 'none';
   })
   .catch(err => console.log(err));
-*/
+
 
 //////Promise.race
 (async function () {
@@ -359,3 +359,5 @@ Promise.all([
 ])
   .then(res => console.log(res))
   .catch(err => console.log(err));
+
+  */
