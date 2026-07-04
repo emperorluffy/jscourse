@@ -271,7 +271,7 @@ const getPosition = function () {
 };
 
 btn.addEventListener('click', whereAmI);
-*/
+
 const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
@@ -316,4 +316,46 @@ createImage('img/img-1.jpg')
   .then(() => {
     currentImg.style.display = 'none';
   })
+  .catch(err => console.log(err));
+*/
+
+//////Promise.race
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://countries-api-836d.onrender.com/countries/name/italy`),
+    getJSON(`https://countries-api-836d.onrender.com/countries/name/mexico`),
+    getJSON(`https://countries-api-836d.onrender.com/countries/name/kenya`),
+  ]);
+  console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long!'));
+    }, sec);
+  });
+};
+
+Promise.race([
+  getJSON(`https://countries-api-836d.onrender.com/countries/name/tanzania`),
+  timeout(0.1),
+])
+  .then(res => console.log(res[0]))
+  .catch(err => console.log(err));
+
+//promise.allSettled
+
+Promise.allSettled([
+  Promise.resolve('Sucess'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Sucess'),
+]).then(res => console.log(res));
+
+Promise.all([
+  Promise.resolve('Sucess'),
+  Promise.reject('Error'),
+  Promise.resolve('Another Sucess'),
+])
+  .then(res => console.log(res))
   .catch(err => console.log(err));
