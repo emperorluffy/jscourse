@@ -776,7 +776,7 @@ console.log(stateClone);
 console.log(stateDeepClone);
 if (module.hot) module.hot.accept();
 
-},{"./shoppingCart.js":"k98Hc","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","lodash-es":"33LEu"}],"k98Hc":[function(require,module,exports,__globalThis) {
+},{"./shoppingCart.js":"k98Hc","lodash-es":"33LEu","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"k98Hc":[function(require,module,exports,__globalThis) {
 //Exporting module
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
