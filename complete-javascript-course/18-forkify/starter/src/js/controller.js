@@ -26,13 +26,12 @@ const controlRecipes = async function () {
     // 2) Rendering recipe
     recipe_view.render(model.state.recipe);
   } catch (err) {
-    // <-- Properly closes try and starts catch
-    alert(err);
+    console.log(err);
   }
 };
 
-controlRecipes();
+const init = function () {
+  recipe_view.addHandlerRender(controlRecipes);
+};
 
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes),
-);
+init();
