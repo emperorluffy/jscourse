@@ -1,6 +1,7 @@
 import { async } from 'regenerator-runtime';
 import { API_URL } from './config';
 import { getJSON } from './helper';
+import recipe_view from './views/recipe_view';
 
 export const state = {
   recipe: {},
@@ -24,5 +25,6 @@ export const loadRecipe = async function (id) {
     console.log(state.recipe);
   } catch (err) {
     console.error(`${err}💥`);
+    throw err;
   }
 };
