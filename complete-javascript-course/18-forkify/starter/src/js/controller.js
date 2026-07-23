@@ -1,14 +1,14 @@
 import * as model from './model.js';
 import recipe_view from './views/recipe_view.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-// NEW API URL (instead of the one shown in the video)
-// https://forkify-api.jonas.io
-
-///////////////////////////////////////
+if (module.hot) {
+  module.hot.accept();
+}
 
 const controlRecipes = async function () {
   try {
@@ -34,10 +34,15 @@ const controlSearchResults = async function () {
   try {
     const query = searchView.getQuery();
     if (!query) return;
+    resultsView.renderSpinner();
 
     await model.loadSearchResults(query);
     console.log(model.state.search.results);
-  } catch (err) {}
+
+    resultsView.render(model.state.search.results);
+  } catch (err) {
+    console.error(err);
+  }
 };
 // controlSearchResults();
 
