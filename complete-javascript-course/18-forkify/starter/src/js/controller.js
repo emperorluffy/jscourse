@@ -34,14 +34,20 @@ const controlSearchResults = async function () {
   try {
     const query = searchView.getQuery();
     if (!query) return;
+
+    // 1) Render spinner in search results sidebar
     resultsView.renderSpinner();
 
+    // 2) Load search results
     await model.loadSearchResults(query);
-    console.log(model.state.search.results);
 
+    // 3) Render results
+    // If state.search.results is an empty array [],
+    // View.js automatically detects it and calls resultsView.renderError()
     resultsView.render(model.state.search.results);
   } catch (err) {
-    console.error(err);
+    // 4) Render error if API request fails
+    resultsView.renderError();
   }
 };
 // controlSearchResults();

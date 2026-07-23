@@ -744,12 +744,17 @@ const controlSearchResults = async function() {
     try {
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
+        // 1) Render spinner in search results sidebar
         (0, _resultsViewJsDefault.default).renderSpinner();
+        // 2) Load search results
         await _modelJs.loadSearchResults(query);
-        console.log(_modelJs.state.search.results);
+        // 3) Render results
+        // If state.search.results is an empty array [],
+        // View.js automatically detects it and calls resultsView.renderError()
         (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
-        console.error(err);
+        // 4) Render error if API request fails
+        (0, _resultsViewJsDefault.default).renderError();
     }
 };
 // controlSearchResults();
