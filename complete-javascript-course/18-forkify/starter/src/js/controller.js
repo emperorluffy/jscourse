@@ -2,13 +2,14 @@ import * as model from './model.js';
 import recipe_view from './views/recipe_view.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const controlRecipes = async function () {
   try {
@@ -42,9 +43,12 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render results
-    // If state.search.results is an empty array [],
-    // View.js automatically detects it and calls resultsView.renderError()
-    resultsView.render(model.state.search.results);
+
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage(3));
+
+    //Render initial pagination buttons
+    paginationView.render(model.state.search);
   } catch (err) {
     // 4) Render error if API request fails
     resultsView.renderError();
@@ -52,9 +56,16 @@ const controlSearchResults = async function () {
 };
 // controlSearchResults();
 
+const controlPagination = function (goToPage) {
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  paginationView.render(model.state.search);
+};
+
 const init = function () {
   recipe_view.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();
